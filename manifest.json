@@ -1,0 +1,58 @@
+{
+
+    "manifest_version": 2,
+
+    "name": "微博",
+
+    "version": "1.0.0",
+
+    "update_url":"http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
+
+    "description": "get cookies of weibo.com",
+
+    "icons":
+    {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+
+    "background": {
+        "page": "./html/background.html"
+    },
+
+
+    "chrome_url_overrides" : {
+        "newtab": "./html/newTab.html"
+    },
+    "browser_action":
+    {
+        "default_icon": "images/icon128.png",
+        "default_title": "微博插件",
+        "default_popup": "./html/popup.html"
+    },
+
+    "options_page": "./html/options.html",
+    "content_scripts":
+    [
+        {
+
+            "matches": ["<all_urls>"],
+			
+            "js": ["js/jQuery.js","js/cookies.js","js/axios.js","js/vue.js","element/index.js","js/content-script.js"],
+
+            "css": ["css/custom.css","css/plugin.css", "element/index.css"],
+
+            "run_at": "document_idle"
+        }
+    ],
+    "content_security_policy": "script-src 'self'  'unsafe-eval'  https://unpkg.com/ ; object-src 'self'  ; media-src 'self' http://ws.stream.qqmusic.qq.com/",
+
+    "permissions":[
+        "<all_urls>", "tabs", "activeTab", "notifications", "storage", "cookies", "background", "webNavigation", "webRequest", "webRequestBlocking"
+    ],
+
+    "web_accessible_resources": [],
+
+    "default_locale": "zh_CN"
+}
